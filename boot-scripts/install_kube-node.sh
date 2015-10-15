@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 ######################################################################
 #
 # VARIABLES:
@@ -20,6 +21,7 @@ echo "installing kubernetes"
 kube_dir="/opt/kubernetes"
 rm -rf "$kube_dir"
 mkdir -p "$kube_dir"
+mkdir -p "$kube_dir/build"
 (
     cd /tmp
     rm -f "kubernetes.tar.gz"
@@ -28,9 +30,9 @@ mkdir -p "$kube_dir"
     rm -rf kubernetes/
     tar xzvf "kubernetes.tar.gz"
 
-    tar xzvf kubernetes/server/kubernetes-server-linux-amd64.tar.gz -C "$kube_dir"
-    cp $kube_dir/kubernetes/server/bin/* $kube_dir/
-    rm -rf $kube_dir/kubernetes
+    tar xzvf kubernetes/server/kubernetes-server-linux-amd64.tar.gz -C "$kube_dir/build"
+    cp $kube_dir/build/kubernetes/server/bin/* $kube_dir/
+    rm -rf $kube_dir/build
 )
 
 cd "$kube_dir"
