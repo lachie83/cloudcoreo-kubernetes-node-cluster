@@ -6,4 +6,5 @@
 
 script-order:
   - install_docker.sh
+  - wait_for_master.sh
   - install_kube-node.sh
