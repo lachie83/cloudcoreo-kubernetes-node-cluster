@@ -144,8 +144,16 @@ variables:
         required: true
         type: null
     KUBE_NODE_ELB_LISTENERS:
-        default:
-        description: leave this blank - we are using ELB for health checks only
+        default: >
+                 [
+                   {
+                       :elb_protocol => 'tcp',
+                       :elb_port => 10250,
+                       :to_protocol => 'tcp',
+                       :to_port => 10250
+                   }
+                 ]
+        description: ports to pass through the elb to the kubernetes node cluster instances
         required: false
         overrides:
           - ELB_LISTENERS
