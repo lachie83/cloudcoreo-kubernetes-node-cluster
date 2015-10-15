@@ -146,7 +146,7 @@ variables:
     KUBE_NODE_ELB_LISTENERS:
         default:
         description: leave this blank - we are using ELB for health checks only
-	required: false
+        required: false
         overrides:
           - ELB_LISTENERS
     KUBE_NODE_KEY:
