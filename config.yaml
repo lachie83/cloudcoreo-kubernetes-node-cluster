@@ -70,14 +70,14 @@ variables:
         default:
         description: leave this blank - we are using ELB for health checks only
         type: Array
-        required: true
+        required: false
         overrides:
           - CLUSTER_ELB_TRAFFIC_PORTS
     KUBE_NODE_ELB_TRAFFIC_CIDRS:
         default:
         description: leave this blank - we are using ELB for health checks only
         type: Array
-        required: true
+        required: false
         overrides:
           - CLUSTER_ELB_TRAFFIC_CIDRS
     KUBE_NODE_TCP_HEALTH_CHECK_PORT:
@@ -146,6 +146,7 @@ variables:
     KUBE_NODE_ELB_LISTENERS:
         default:
         description: leave this blank - we are using ELB for health checks only
+	required: false
         overrides:
           - ELB_LISTENERS
     KUBE_NODE_KEY:
