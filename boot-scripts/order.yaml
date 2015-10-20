@@ -10,3 +10,4 @@ script-order:
   - install_docker.sh
   - start_docker.sh
   - start_kube_node.sh
+  - set_node_label.sh

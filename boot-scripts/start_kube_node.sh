@@ -29,7 +29,7 @@ nohup ./kube-proxy \
 # Use KUBELET_OPTS to modify the start/restart options
 nohup ./kubelet --address=$MY_IPADDRESS \
   --port=10250 \
-  --hostname_override=$MY_IPADDRESS \
+  --hostname_override=$name \
   --api_servers=http://${KUBE_MASTER_NAME}.${DNS_ZONE}:8080 \
   --v=2 \
     2>&1 >> ${KUBE_KUBLET_LOG_FILE} &
