@@ -70,6 +70,13 @@ def getRegion():
 
 def getInstanceId():
     ## cached
+    global INSTANCE_ID
+    if INSTANCE_ID == None:
+        INSTANCE_ID = metaData("instance-id")
+    return INSTANCE_ID
+
+def getSubnetById(subnetid):
+    ## cached
     subnet_filters = [['subnet-id', subnetid]]
     subnet = VPC.get_all_subnets(filters=subnet_filters)[0]
     log('got a subnet: %s' % subnet.id)
