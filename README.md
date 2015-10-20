@@ -40,9 +40,8 @@ As nodes come up they create a table of usable values based on the two variables
 10.234.15.0/26
 10.234.15.64/26
 ```
-Each node will check the route tables in its VPC for the next usable address range and assign itself that network range within kubernetes and also in the necessary route tables
+Each node will check the kubernets nodes via kubectl command and find an unused network block. It will then insert a 'blackhole' into the proper routing tables, thus allowing the master to take them over. The 'used network blocks' are determined by the labels set on the nodes.
 
-Default values will result in a 2 datacenter deployment behind an internal load balancer addressable via a DNS record. 
 ## REQUIRED VARIABLES
 ### `DNS_ZONE`:
   * description: the dns zone (eg. example.com)
