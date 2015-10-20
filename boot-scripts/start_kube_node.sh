@@ -16,8 +16,6 @@ set -x
 ## this stack extends the leader elect cluster, so lets source in the cluster profile and expose some variables to us
 source /etc/profile.d/cluster
 
-echo "installing kubernetes"
-
 kube_dir="/opt/kubernetes"
 
 cd "$kube_dir"

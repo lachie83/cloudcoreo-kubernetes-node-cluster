@@ -21,24 +21,18 @@ coreo_aws_iam_policy "${KUBE_NODE_NAME}" do
     {
       "Effect": "Allow",
       "Action": [
-        "autoscaling:DescribeAutoScalingGroups",
-        "autoscaling:DescribeAutoScalingInstances",
-        "ec2:DescribeAvailabilityZones",
-        "ec2:DescribeInstanceStatus",
-        "ec2:ModifyInstanceAttribute",
-        "ec2:DescribeInstanceAttribute",
-        "ec2:DescribeRegions",
-        "ec2:ModifyInstanceAttribute",
-        "ec2:ReplaceRoute",
-        "ec2:CreateRoute",
-        "ec2:ReplaceRouteTableAssociation",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeRouteTables",
-        "ec2:AssociateAddress",
-        "ec2:DescribeAddresses",
-        "ec2:DisassociateAddress",
-        "ec2:DescribeInstances",
-        "ec2:DescribeTags" 
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:DescribeAutoScalingInstances",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeInstances",
+                "ec2:DescribeTags",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface",
+                "ec2:CreateRoute"
       ],
       "Resource": [
         "*"
