@@ -109,6 +109,11 @@ def getMyASGSubnets():
             MY_ASG_SUBNETS.append(getSubnetById(subnetId))
     return MY_ASG_SUBNETS
 
+def getMyRouteTables(subnet):
+    ## this cannot be cached beacuse we need to keep checking the route tables
+    rt_filters = [['vpc-id', getMyVPCId()], ['association.subnet-id', subnet.id]]
+    return VPC.get_all_route_tables(filters=rt_filters)
+
 def getMe():
     return EC2.get_only_instances(instance_ids=[getInstanceId()])[0]
 
