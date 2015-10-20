@@ -1,6 +1,7 @@
 #!/bin/bash
 
 yum install -y docker
+pip install netaddr
 
 source /etc/profile.d/cluster
 
