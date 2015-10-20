@@ -61,7 +61,7 @@ variables:
     KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER:
         default: 26
         description: kubernetes service cidrs
-	type: number
+        type: number
         required: true
     KUBE_MASTER_NAME:
         default: kube-master
