@@ -43,83 +43,111 @@ As nodes come up they create a table of usable values based on the two variables
 Each node will check the kubernets nodes via kubectl command and find an unused network block. It will then insert a 'blackhole' into the proper routing tables, thus allowing the master to take them over. The 'used network blocks' are determined by the labels set on the nodes.
 
 ## REQUIRED VARIABLES
+
 ### `DNS_ZONE`:
   * description: the dns zone (eg. example.com)
+
 ### `VPC_NAME`:
   * description: the cloudcoreo defined vpc to add this cluster to
+
 ### `VPC_CIDR`:
   * description: the cloudcoreo defined vpc to add this cluster to
+
 ### `PRIVATE_SUBNET_NAME`:
   * description: the private subnet in which the cluster should be added
+
 ### `PRIVATE_ROUTE_NAME`:
   * description: the private subnet in which the cluster should be added
+
 ### `KUBE_NODE_KEY`:
   * description: the ssh key to associate with the instance(s) - blank will disable ssh
 
 ## OVERRIDE OPTIONAL VARIABLES
+
 ### `KUBE_VERSION`:
   * description: kubernetes version
   * default: 1.0.6
+
 ### `KUBE_MASTER_SERVICE_IP_CIDRS`:
   * default: 10.1.1.0/24
   * description: kubernetes service cidrs
+
 ### `KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER`:
   * default: 26
   * description: 
+
 ### `KUBE_ALLOW_PRIVILEGED`:
   * default: true
   * description: allow privileged containers
+
 ### `KUBE_KUBLET_LOG_FILE`:
   * description: kublet log file
   * default: /var/log/kube-kublet.log
+
 ### `KUBE_PROXY_LOG_FILE`:
   * description: ha-nat log file
   * default: /var/log/kube-api.log
+
 ### `KUBE_MASTER_NAME`:
   * default: kube-master
   * description: the name of the cluster - this will become your dns record too
+
 ### `KUBE_NODE_NAME`:
   * default: kube-node
   * description: the name of the cluster - this will become your dns record too
+
 ### `KUBE_NODE_ELB_TRAFFIC_PORTS`:
   * default: 8080
   * description: ports that need to allow traffic into the ELB
+
 ### `KUBE_NODE_ELB_TRAFFIC_CIDRS`:
   * default: 
   * description: leave this blank - we are using ELB for health checks only
+
 ### `KUBE_NODE_TCP_HEALTH_CHECK_PORT`:
   * default: 10250
   * description: a tcp port the ELB will check every so often - this defines health and ASG termination
+
 ### `KUBE_NODE_INSTANCE_TRAFFIC_PORTS`:
   * default: 1..65535
   * description: ports to allow traffic on directly to the instances
+
 ### `KUBE_NODE_INSTANCE_TRAFFIC_CIDRS`:
   * default: 10.0.0.0/8
   * description: cidrs that are allowed to access the instances directly
+
 ### `KUBE_NODE_SIZE`:
   * default: t2.small
   * description: the image size to launch
+
 ### `KUBE_NODE_GROUP_SIZE_MIN`:
   * default: 3
   * description: the minimum number of instances to launch
+
 ### `KUBE_NODE_GROUP_SIZE_MAX`:
   * default: 6
   * description: the maxmium number of instances to launch
+
 ### `KUBE_NODE_HEALTH_CHECK_GRACE_PERIOD`:
   * default: 600
   * description: the time in seconds to allow for instance to boot before checking health
+
 ### `KUBE_NODE_UPGRADE_COOLDOWN`:
   * default: 300
   * description: the time in seconds between rolling instances during an upgrade
+
 ### `TIMEZONE`:
   * default: America/LosAngeles
   * description: the timezone the servers should come up in
+
 ### `KUBE_MASTER_ELB_LISTENERS`:
   * default: [{ :elb_protocol => 'tcp', :elb_port => 10250, :to_protocol => 'tcp', :to_port => 10250 }]
   * description: The listeners to apply to the ELB
+
 ### `DATADOG_KEY`:
   * default: ''
   * description: "If you have a datadog key, enter it here and we will install the agent"
+
 ### `WAIT_FOR_KUBE_MASTER_MIN`:
   * default: true
   * description: true if the cluster should wait for all instances to be in a running state
