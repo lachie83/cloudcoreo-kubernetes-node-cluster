@@ -162,8 +162,8 @@ Each node will check the kubernets nodes via kubectl command and find an unused 
 1. Cluster
 
 ## Diagram
-![alt text](https://raw.githubusercontent.com/lachie83/cloudcoreo-kubernetes-master-cluster/master/images/kubernetes-master-diagram.png "Kubernetes Master Cluster Diagram")
+![alt text](https://raw.githubusercontent.com/lachie83/cloudcoreo-kubernetes-node-cluster/master/images/kubernetes-node-diagram.png "Kubernetes Master Cluster Diagram")
 
 ## Icon
-![alt text](https://raw.githubusercontent.com/lachie83/cloudcoreo-kubernetes-master-cluster/master/images/kubernetes-master.png "kubernetes icon")
+![alt text](https://raw.githubusercontent.com/lachie83/cloudcoreo-kubernetes-node-cluster/master/images/kubernetes-node.png "kubernetes icon")
 
