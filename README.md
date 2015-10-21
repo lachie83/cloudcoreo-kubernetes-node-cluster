@@ -12,13 +12,13 @@ The node cluster is quite interesting in the way it works with the master cluste
 
 For instance:
 
-Lets assume you set the `KUBE_MASTER_SERVICE_IP_CIDRS` variable to `10.234.0.0/20`. 
+Lets assume you set the `KUBE_NODE_SERVICE_IP_CIDRS` variable to `10.234.0.0/20`. 
 Your job is to decide how many (maximum) containers you want to run simultaneously on each node. 
-For this, lets decide on `62` as the maximum. Great! That just happens to mean you put in a value for `KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER` that gets you 64 addresses (62 usable, 1 for the broadcast and one for network address). That value is `26`.
+For this, lets decide on `62` as the maximum. Great! That just happens to mean you put in a value for `KUBE_NODE_SERVICE_IP_CIDRS_SUBDIVIDER` that gets you 64 addresses (62 usable, 1 for the broadcast and one for network address). That value is `26`.
 
 ```
-KUBE_MASTER_SERVICE_IP_CIDRS = 10.234.0.0/20
-KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER = 25
+KUBE_NODE_SERVICE_IP_CIDRS = 10.234.0.0/20
+KUBE_NODE_SERVICE_IP_CIDRS_SUBDIVIDER = 25
 ```
 
 So what happens now?
@@ -68,11 +68,11 @@ Each node will check the kubernets nodes via kubectl command and find an unused 
   * description: kubernetes version
   * default: 1.0.6
 
-### `KUBE_MASTER_SERVICE_IP_CIDRS`:
+### `KUBE_NODE_SERVICE_IP_CIDRS`:
   * default: 10.1.1.0/24
   * description: kubernetes service cidrs
 
-### `KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER`:
+### `KUBE_NODE_SERVICE_IP_CIDRS_SUBDIVIDER`:
   * default: 26
   * description: 
 

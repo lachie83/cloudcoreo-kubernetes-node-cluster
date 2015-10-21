@@ -6,7 +6,7 @@ pip install netaddr
 source /etc/profile.d/cluster
 
 name="$(echo $MY_IPADDRESS | perl -pe 's{\.}{}g')"
-all_nets="$(python ./lib/generate_network_blocks.py  --master-cidr-block ${KUBE_MASTER_SERVICE_IP_CIDRS} --cidr-divider ${KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER})"
+all_nets="$(python ./lib/generate_network_blocks.py  --master-cidr-block ${KUBE_NODE_IP_CIDRS} --cidr-divider ${KUBE_NODE_IP_CIDRS_SUBDIVIDER})"
 
 ## get an unused bip
 (
@@ -39,7 +39,7 @@ DAEMON_MAXFILES=1048576
 # Additional startup options for the Docker daemon, for example:
 # OPTIONS="--ip-forward=true --iptables=true"
 # By default we limit the number of open files per container
-OPTIONS="--default-ulimit nofile=1024:4096 --bip=${DOCKER_BIP}/${KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER}"
+OPTIONS="--default-ulimit nofile=1024:4096 --bip=${DOCKER_BIP}/${KUBE_NODE_IP_CIDRS_SUBDIVIDER}"
 EOF
 
 )
