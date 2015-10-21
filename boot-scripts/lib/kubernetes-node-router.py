@@ -119,8 +119,6 @@ def getMe():
 
 def main():
     log("main | creating network interface for blackhole route additions")
-    ein = EC2.create_network_interface(getMe().subnet_id)
-    log('ein: %s' % ein.id)
     for subnet in getMyASGSubnets():
         for route_table in getMyRouteTables(subnet):
             if route_table.id == None:
@@ -129,17 +127,19 @@ def main():
             for route in route_table.routes:
                 if route.destination_cidr_block == options.bip:
                     routeExists = True
-                    continue
             if routeExists == False:
                 log('adding route[%s -> %s] to table[%s]' % (options.bip, getInstanceId(), route_table.id))
                 VPC.create_route(route_table_id = route_table.id,
                                  destination_cidr_block = options.bip,
-                                 interface_id = ein.id)
+                                 instance_id = getInstanceId())
+            else:
+                log('replacing route[%s -> %s] to table[%s]' % (options.bip, getInstanceId(), route_table.id))
+                VPC.replace_route(route_table_id = route_table.id,
+                                 destination_cidr_block = options.bip,
+                                 instance_id = getInstanceId())
 
             else:
                 log('skipped route exists')
-    log('main | deleting network interface to force blackhole')
-    EC2.delete_network_interface(ein.id)
 
 (options, args) = parseArgs()
 
