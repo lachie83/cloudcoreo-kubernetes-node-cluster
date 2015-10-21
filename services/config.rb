@@ -30,8 +30,6 @@ coreo_aws_iam_policy "${KUBE_NODE_NAME}" do
                 "ec2:DescribeTags",
                 "ec2:DescribeSubnets",
                 "ec2:DescribeRouteTables",
-                "ec2:CreateNetworkInterface",
-                "ec2:DeleteNetworkInterface",
                 "ec2:CreateRoute"
       ],
       "Resource": [
