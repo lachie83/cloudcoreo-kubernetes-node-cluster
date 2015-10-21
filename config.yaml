@@ -54,13 +54,22 @@ variables:
         required: true
         overrides:
           - CLUSTER_AMI
+    KUBE_MASTER_SERVICE_IP_CIDRS:
+        default: 10.1.1.0/24
+        description: kubernetes service cidrs
+        required: true
+    KUBE_MASTER_SERVICE_IP_CIDRS_SUBDIVIDER:
+        default: 26
+        description: kubernetes service cidrs
+        type: number
+        required: true
     KUBE_MASTER_NAME:
         default: kube-master
         description: the name of the cluster - this will become your dns record too
         type: String
         required: true
     KUBE_NODE_NAME:
-        default: kube-master
+        default: kube-node
         description: the name of the cluster - this will become your dns record too
         type: String
         required: true
@@ -74,7 +83,7 @@ variables:
         overrides:
           - CLUSTER_ELB_TRAFFIC_PORTS
     KUBE_NODE_ELB_TRAFFIC_CIDRS:
-        default:
+        default: 
         description: leave this blank - we are using ELB for health checks only
         type: Array
         required: false
@@ -110,14 +119,14 @@ variables:
         overrides:
           - CLUSTER_SIZE
     KUBE_NODE_GROUP_SIZE_MIN:
-        default: 2
+        default: 3
         description: the minimum number of instances to launch
         type: number
         required: true
         overrides:
           - CLUSTER_GROUP_SIZE_MIN
     KUBE_NODE_GROUP_SIZE_MAX:
-        default: 2
+        default: 6
         description: the maxmium number of instances to launch
         type: number
         required: true
@@ -140,9 +149,7 @@ variables:
     TIMEZONE:
         default: America/LosAngeles
         description: the timezone the servers should come up in
-        overrides: null
         required: true
-        type: null
     KUBE_NODE_ELB_LISTENERS:
         default: >
                  [

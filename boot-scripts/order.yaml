@@ -5,7 +5,10 @@
 ##   - run_chef.sh
 
 script-order:
-  - install_docker.sh
   - install_kubernetes_binaries.sh
   - wait_for_master.sh
-  - install_kube-node.sh
+  - install_docker.sh
+  - start_docker.sh
+  - start_kube_node.sh
+  - set_node_label.sh
+  - update_route_tables.sh
