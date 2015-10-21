@@ -12,7 +12,7 @@ all_nets="$(python ./lib/generate_network_blocks.py  --master-cidr-block ${KUBE_
 (
     kube_dir="/opt/kubernetes"
     cd "$kube_dir"
-    used_nets="$(./kubectl --server=http://${KUBE_MASTER_NAME}.${DNS_ZONE}:8080 get nodes | grep ipblock | awk -F'ipblock=' '{print $2}' | perl -pe 's#([0-9\.]+).*#\1#g')"
+    used_nets="$(./kubectl --server=http://${KUBE_MASTER_NAME}.${DNS_ZONE}:8080 get nodes | grep -i \\bready\\b | grep ipblock | awk -F'ipblock=' '{print $2}' | perl -pe 's#([0-9\.]+).*#\1#g')"
 
     DOCKER_BIP=
     for aNet in $all_nets; do
