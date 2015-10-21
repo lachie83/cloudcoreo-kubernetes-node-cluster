@@ -117,6 +117,9 @@ def getMyRouteTables(subnet):
 def getMe():
     return EC2.get_only_instances(instance_ids=[getInstanceId()])[0]
 
+def disableSourceDestChecks():
+    EC2.modify_instance_attribute(getInstanceId(), "sourceDestCheck", False)
+
 def main():
     log("main | creating network interface for blackhole route additions")
     for subnet in getMyASGSubnets():
@@ -151,5 +154,6 @@ EC2 = boto.ec2.connect_to_region(getRegion())
 VPC = boto.vpc.connect_to_region(getRegion())
 AUTOSCALE = boto.ec2.autoscale.connect_to_region(getRegion())
 
+disableSourceDestChecks()
 main()
 
