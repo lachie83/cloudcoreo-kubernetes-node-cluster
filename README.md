@@ -40,7 +40,7 @@ As nodes come up they create a table of usable values based on the two variables
 10.234.15.0/26
 10.234.15.64/26
 ```
-Each node will check the kubernets nodes via kubectl command and find an unused network block. It will then insert a 'blackhole' into the proper routing tables, thus allowing the master to take them over. The 'used network blocks' are determined by the labels set on the nodes.
+Each node will check the kubernets nodes via kubectl command and find an unused network block. It will then insert itself into the proper routing tables. The 'used network blocks' are determined by the labels set on the nodes.
 
 ## REQUIRED VARIABLES
 
