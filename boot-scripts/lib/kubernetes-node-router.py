@@ -141,9 +141,6 @@ def main():
                                  destination_cidr_block = options.bip,
                                  instance_id = getInstanceId())
 
-            else:
-                log('skipped route exists')
-
 (options, args) = parseArgs()
 
 if options.version:
