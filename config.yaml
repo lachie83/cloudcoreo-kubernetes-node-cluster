@@ -56,7 +56,7 @@ variables:
           - CLUSTER_AMI
     KUBE_NODE_IP_CIDRS:
         default: 10.2.1.0/24
-        description: Node IP CIDR block - NOTE: This MUST be different that the cidr specified for the kubernetes master service cidrs
+        description: Node IP CIDR block - NOTE - This MUST be different that the cidr specified for the kubernetes master service cidrs
         required: true
     KUBE_NODE_IP_CIDRS_SUBDIVIDER:
         default: 26
