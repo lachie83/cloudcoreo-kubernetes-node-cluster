@@ -8,6 +8,14 @@ source /etc/profile.d/cluster
 name="$(echo $MY_IPADDRESS | perl -pe 's{\.}{}g')"
 all_nets="$(python ./lib/generate_network_blocks.py  --master-cidr-block ${KUBE_NODE_IP_CIDRS} --cidr-divider ${KUBE_NODE_IP_CIDRS_SUBDIVIDER})"
 
+my_location_in_list=0
+for ip in $CLUSTER_ADDRESSES; do
+    if [ "$ip" = "$MY_IPADDRESS" ]; then
+	break;
+    fi
+    my_location_in_list=$((my_location_in_list + 1))
+done
+
 ## get an unused bip
 (
     kube_dir="/opt/kubernetes"
@@ -15,18 +23,22 @@ all_nets="$(python ./lib/generate_network_blocks.py  --master-cidr-block ${KUBE_
     used_nets="$(./kubectl --server=http://${KUBE_MASTER_NAME}.${DNS_ZONE}:8080 get nodes | grep -i \\bready\\b | grep ipblock | awk -F'ipblock=' '{print $2}' | perl -pe 's#([0-9\.]+).*#\1#g')"
 
     DOCKER_BIP=
+    net_counter=1
     for aNet in $all_nets; do
-	unused=true
-	for uNet in $used_nets; do
-	    if [ "$uNet" = "$aNet" ]; then
-		unused=false
+	if [ $((net_counter%3)) = $my_location_in_list ]; then
+	    unused=true
+	    for uNet in $used_nets; do
+		if [ "$uNet" = "$aNet" ]; then
+		    unused=false
+		fi
+	    done
+	    
+	    if [ $unused = true ]; then
+		DOCKER_BIP="$aNet"
+		break
 	    fi
-	done
-	
-	if [ $unused = true ]; then
-	    DOCKER_BIP="$aNet"
-	    break
 	fi
+	net_counter=$((net_counter + 1))
     done
     
     ## docker config
