@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 yum install -y docker
 pip install netaddr
