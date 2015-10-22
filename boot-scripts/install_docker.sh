@@ -9,8 +9,10 @@ source /etc/profile.d/cluster
 name="$(echo $MY_IPADDRESS | perl -pe 's{\.}{}g')"
 all_nets="$(python ./lib/generate_network_blocks.py  --master-cidr-block ${KUBE_NODE_IP_CIDRS} --cidr-divider ${KUBE_NODE_IP_CIDRS_SUBDIVIDER})"
 
+asg_addresses=$(echo "$CLUSTER_ADDRESSES , $MY_IPADDRESS" | perl -pe 's{,}{}g; s{ }{\n}g' | sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n)
+
 my_location_in_list=0
-for ip in $CLUSTER_ADDRESSES; do
+for ip in $asg_addresses; do
     if [ "$ip" = "$MY_IPADDRESS" ]; then
 	break;
     fi
