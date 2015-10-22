@@ -43,7 +43,11 @@ done
 	fi
 	net_counter=$((net_counter + 1))
     done
-    
+    ## lets add 1 to the net
+    baseaddr="$(echo $DOCKER_BIP | cut -d. -f1-3)"
+    lsv="$(echo $DOCKER_BIP | cut -d. -f4)"
+    docker_bind="$baseaddr.$((lsv + 1))"
+
     ## docker config
     cat <<EOF > /etc/sysconfig/docker
 # The max number of open files for the daemon itself, and all
@@ -54,7 +58,8 @@ DAEMON_MAXFILES=1048576
 # Additional startup options for the Docker daemon, for example:
 # OPTIONS="--ip-forward=true --iptables=true"
 # By default we limit the number of open files per container
-OPTIONS="--default-ulimit nofile=1024:4096 --bip=${DOCKER_BIP}/${KUBE_NODE_IP_CIDRS_SUBDIVIDER}"
+# dockernet=${DOCKER_BIP}/${KUBE_NODE_IP_CIDRS_SUBDIVIDER}
+OPTIONS="--default-ulimit nofile=1024:4096 --bip=${docker_bind}/${KUBE_NODE_IP_CIDRS_SUBDIVIDER}"
 EOF
 
 )
