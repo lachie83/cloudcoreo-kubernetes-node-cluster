@@ -1,4 +1,4 @@
-kubernetes-master-cluster
+kubernetes-node-cluster
 =========================
 
 This repository is the [CloudCoreo](https://www.cloudcoreo.com) stack for kubernetes node clusters.
