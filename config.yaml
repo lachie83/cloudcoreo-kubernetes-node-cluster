@@ -3,7 +3,7 @@ variables:
         description: kubernetes version
         type: String
         required: true
-        default: 1.0.6
+        default: 1.1.4
     KUBE_PROXY_LOG_FILE:
         required: false
         description: kube proxy log file
